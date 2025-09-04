@@ -1,75 +1,21 @@
-﻿namespace StringProjekt
+﻿using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
+
+namespace StringProjekt
 {
     public static class StringMuveletek
     {
-        /// <summary>
-        /// Felbontja a szöveget szóközök mentén szavakra.
-        /// </summary>
-        /// <param name="szoveg">A vizsgált teljes szöveg</param>
-        /// <returns>A szavakat tartalmazó tömb</returns>
-        /// <example>SzavakListaja("alma a fa") => ["alma", "a", "fa"]</example>
-        public static string[] SzavakListaja(string szoveg)
-        {
-            return [];
-        }
+        public static string[] SzavakListaja(string szoveg) => szoveg.Split(" ");
 
-        /// <summary>
-        /// Eldönti, hogy a megadott szöveg a keresett szöveggel kezdődik-e.
-        /// </summary>
-        /// <param name="szoveg">Vizsgált szöveg</param>
-        /// <param name="keresett">Keresett kezdő szórészlet</param>
-        /// <returns>True, ha kezdődik vele, egyébként false</returns>
-        /// <example>KezdodikE("alma", "al") => true</example>
-        private static bool KezdodikE(string szoveg, string keresett)
-        {
-            return false;
-        }
-
-        /// <summary>
-        /// Eldönti, hogy a megadott szöveg a keresett szöveggel végződik-e.
-        /// </summary>
-        /// <param name="szoveg">Vizsgált szöveg</param>
-        /// <param name="keresett">Keresett végződés</param>
-        /// <returns>True, ha végződik vele, egyébként false</returns>
-        /// <example>VegzodikE("alatt", "tt") => true</example>
-        private static bool VegzodikE(string szoveg, string keresett)
-        {
-            return false;
-        }
-
-        /// <summary>
-        /// Minden szó első betűjét nagybetűssé alakítja, a többit kisbetűssé.
-        /// </summary>
-        /// <param name="szoveg">A bemeneti szöveg</param>
-        /// <returns>Címszerűen formázott szöveg</returns>
-        /// <example>CimFormazas("alma a fa alatt") => "Alma A Fa Alatt"</example>
         public static string CimFormazas(string szoveg)
         {
-            return string.Empty;
+            string output = szoveg;
+            output.Split(" ").ToList().ForEach(x => x.Replace(x[0], x[0].ToString().ToUpper().ToCharArray()[0]));
+            return output;
         }
 
-        /// <summary>
-        /// Visszaadja azokat a szavakat, amelyek a keresett részlettel kezdődnek.
-        /// </summary>
-        /// <param name="szavak">Szavak tömbje</param>
-        /// <param name="keresett">Kezdő szórészlet</param>
-        /// <returns>Azok a szavak, amelyek ezzel kezdődnek</returns>
-        /// <example>SzavakKezdodikEvel(["alma", "fa"], "a") => ["alma"]</example>
-        public static string[] SzavakKezdodikEvel(string[] szavak, string keresett)
-        {
-            return [];
-        }
+        public static string[] SzavakKezdodikEvel(string[] szavak, string keresett) => szavak.ToList().Where(x => x.StartsWith(keresett)).ToArray();
 
-        /// <summary>
-        /// Visszaadja azokat a szavakat, amelyek a keresett részlettel végződnek.
-        /// </summary>
-        /// <param name="szavak">Szavak tömbje</param>
-        /// <param name="keresett">Végződő szórészlet</param>
-        /// <returns>Azok a szavak, amelyek ezzel végződnek</returns>
-        /// <example>SzavakVegzodikEvel(["alma", "alatt"], "t") => ["alatt"]</example>
-        public static string[] SzavakVegzodikEvel(string[] szavak, string keresett)
-        {
-            return [];
-        }
+        public static string[] SzavakVegzodikEvel(string[] szavak, string keresett) => szavak.ToList().Where(x => x.EndsWith(keresett)).ToArray();
     }
 }
